@@ -3,8 +3,11 @@
 doctype html
 html
     head
-        title= title
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
     body
+        <div>
         h1 Add a New Player
         form(action="/update-cobj" method="POST")
             label(for="name") Player Name:
@@ -19,3 +22,4 @@ html
             button(type="submit") Submit
             br
             a(href="/") Return to homepage
+        <div>
