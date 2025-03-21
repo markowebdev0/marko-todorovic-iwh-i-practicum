@@ -15,15 +15,17 @@ const PRIVATE_APP_ACCESS = process.env.HUBSPOT_ACCESS_TOKEN;
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
-app.get('/homepage-players', async (req, res) => {
-    const url = 'https://api.hubapi.com/crm/v3/objects/players?properties=player_name,player_country,player_team';
+app.get('/', async (req, res) => {
+    const url = 'https://api.hubapi.com/crm/v3/objects/players?properties=name,country,team';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     };
-
+    const params = {
+        properties: ['name', 'country', 'team'] // Add the property names you want here
+    }
     try {
-        const response = await axios.get(url, { headers });
+        const response = await axios.get(url, { headers, params });
         const players = response.data.results; // Extract players 
         res.render('homepage', { title: 'Players List | HubSpot API', players }); // Pass data 
     } catch (error) {
@@ -35,9 +37,6 @@ app.get('/homepage-players', async (req, res) => {
 
 // redirect
 
-app.get('/', (req, res) => {
-    res.redirect('/homepage-players');
-});
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
@@ -53,9 +52,9 @@ app.get('/update-players', (req, res) => {
 app.post('/update-players', async (req, res) => {
     const newPlayer = {
         properties: {
-            player_name: req.body.player_name,
-            player_country: req.body.player_country,
-            player_team: req.body.player_team
+            name: req.body.name,
+            country: req.body.country,
+            team: req.body.team
         }
     };
     const url = 'https://api.hubapi.com/crm/v3/objects/players';
@@ -66,7 +65,7 @@ app.post('/update-players', async (req, res) => {
 
     try {
         await axios.post(url, newPlayer, { headers });
-        res.redirect('/homepage-players'); // Redirect back to homepage
+        res.redirect('/'); // Redirect back to homepage
     } catch (error) {
         console.error('Error creating player:', error.response?.data || error.message);
         res.status(500).send('Failed to create player.');
