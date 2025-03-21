@@ -7,14 +7,14 @@ html
     body
         h1 Add a New Player
         form(action="/update-players" method="POST")
-            label(for="player_name") Player Name:
-            input(type="text" name="player_name" required)
+            label(for="name") Player Name:
+            input(type="text" name="name" required)
             br
-            label(for="player_country") Country:
-            input(type="text" name="player_country" required)
+            label(for="country") Country:
+            input(type="text" name="country" required)
             br
-            label(for="player_team") Team:
-            input(type="text" name="player_team" required)
+            label(for="team") Team:
+            input(type="text" name="team" required)
             br
             button(type="submit") Submit
             br
