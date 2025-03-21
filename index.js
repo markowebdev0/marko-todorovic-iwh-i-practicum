@@ -16,7 +16,7 @@ const PRIVATE_APP_ACCESS = process.env.HUBSPOT_ACCESS_TOKEN;
 
 // * Code for Route 1 goes here
 app.get('/homepage-players', async (req, res) => {
-    const url = 'https://api.hubapi.com/crm/v3/objects/contacts?properties=player_name,player_country,player_team';
+    const url = 'https://api.hubapi.com/crm/v3/objects/players?properties=player_name,player_country,player_team';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -58,20 +58,19 @@ app.post('/update-players', async (req, res) => {
             player_team: req.body.player_team
         }
     };
-
-    const url = 'https://api.hubapi.com/crm/v3/objects/contacts';
+    const url = 'https://api.hubapi.com/crm/v3/objects/players';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     };
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
+    try {
+        await axios.post(url, newPlayer, { headers });
+        res.redirect('/homepage-players'); // Redirect back to homepage
+    } catch (error) {
+        console.error('Error creating player:', error.response?.data || error.message);
+        res.status(500).send('Failed to create player.');
     }
-
 });
 
 
