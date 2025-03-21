@@ -1,0 +1,25 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        <div>
+        h1 Players List
+        a(href="/update-cobj") Add to this table
+        table(border="1")
+            thead
+                tr
+                    th Name
+                    th Country
+                    th Team
+            tbody
+                each player in players
+                    tr
+                        td= player.properties.name
+                        td= player.properties.country
+                        td= player.properties.team
+        </div>
