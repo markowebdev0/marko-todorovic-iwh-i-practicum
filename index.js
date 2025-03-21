@@ -41,7 +41,7 @@ app.get('/', async (req, res) => {
 
 // * Code for Route 2 goes here
 
-app.get('/update-players', (req, res) => {
+app.get('/update-cobj', (req, res) => {
     res.render('updates', { title: 'Update Player | HubSpot API' });
 });
 
@@ -49,7 +49,7 @@ app.get('/update-players', (req, res) => {
 
 // * Code for Route 3 goes here
 
-app.post('/update-players', async (req, res) => {
+app.post('/update-cobj', async (req, res) => {
     const newPlayer = {
         properties: {
             name: req.body.name,
