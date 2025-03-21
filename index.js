@@ -44,7 +44,7 @@ app.get('/update-players', (req, res) => {
 
 // * Code for Route 3 goes here
 
-app.post('/update', async (req, res) => {
+app.post('/update-players', async (req, res) => {
     const update = {
         properties: {
             "favorite_book": req.body.newVal

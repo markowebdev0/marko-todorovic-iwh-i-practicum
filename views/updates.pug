@@ -6,7 +6,7 @@ html
         title= title
     body
         h1 Add a New Player
-        form(action="/update-cobj" method="POST")
+        form(action="/update-players" method="POST")
             label(for="player_name") Player Name:
             input(type="text" name="player_name" required)
             br
@@ -18,4 +18,4 @@ html
             br
             button(type="submit") Submit
         br
-        a(href="/") Return to homepage
+     a(href="/homepage-players") Return to homepage
