@@ -45,14 +45,15 @@ app.get('/update-players', (req, res) => {
 // * Code for Route 3 goes here
 
 app.post('/update-players', async (req, res) => {
-    const update = {
+    const newPlayer = {
         properties: {
-            "favorite_book": req.body.newVal
+            player_name: req.body.player_name,
+            player_country: req.body.player_country,
+            player_team: req.body.player_team
         }
-    }
+    };
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
+    const url = 'https://api.hubapi.com/crm/v3/objects/contacts';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
