@@ -6,10 +6,18 @@ html
         title= `${title}`
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
-    body    
-        h1 Contacts
-        .cards 
-            each contact in data
-                .card 
-                    h2.card__name #{contact.properties.name}  
-                   
+    body
+        h1 Players List
+        a(href="/update-cobj") Add New Player
+        table(border="1")
+            thead
+                tr
+                    th Name
+                    th Country
+                    th Team
+            tbody
+                each player in players
+                    tr
+                        td= player.properties.player_name
+                        td= player.properties.player_country
+                        td= player.properties.player_team

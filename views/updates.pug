@@ -1,15 +1,21 @@
 //- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
 
 doctype html
-html 
-    head 
-        title= `${title}`
-        meta(name="viewport" content="width=device-width, initial-scale=1")
-        link(rel="stylesheet", href="/css/style.css")
-    body    
-        h1 Contacts
-        .cards 
-            each contact in data
-                .card 
-                    h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-                    p.card__email #{contact.properties.email}
+html
+    head
+        title= title
+    body
+        h1 Add a New Player
+        form(action="/update-cobj" method="POST")
+            label(for="player_name") Player Name:
+            input(type="text" name="player_name" required)
+            br
+            label(for="player_country") Country:
+            input(type="text" name="player_country" required)
+            br
+            label(for="player_team") Team:
+            input(type="text" name="player_team" required)
+            br
+            button(type="submit") Submit
+        br
+        a(href="/") Return to homepage
